@@ -10,9 +10,9 @@ class File
 {
 
     /**
-     * Repair string path
-     * @param string $path
-     * @return string
+     * Repair path
+     * @param string $path The path to be repaired
+     * @return string The repaired path
      */
     public static function repairPath(string $path) : string {
         $path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
@@ -25,11 +25,12 @@ class File
     }
 
     /**
-     * Create dir
-     * @param string|array $paths directory path or paths
-     * @param int $permission permission (default 0777)
-     * @return ?bool bool or null (if $paths is array)
-     * @throws Exception
+     * Creates a new directory or directories.
+     * @param string|array $paths the path(s) of the directory to be created.
+     * @param int $permission Optional. The permissions to set for the new directory. Default is 0755.
+     * @return ?bool Returns true if the directory is successfully created, false if the directory already exists,
+     *               or null if an array of paths is provided (recursive directory creation).
+     * @throws Exception If the directory creation failed.
      */
     public static function mkdir(string|array $paths, int $permission = 0755) : ?bool {
         if (is_array($paths)) {
@@ -52,9 +53,9 @@ class File
     }
 
     /**
-     * Remove file
-     * @param string $path
-     * @return bool
+     * Deletes a file.
+     * @param string $path The path of the file to be deleted.
+     * @return bool Returns true if the file is successfully deleted, or false if the file does not exist.
      */
     public static function unlink(string $path) : bool {
         if (!file_exists($path)) {
@@ -65,9 +66,9 @@ class File
     }
 
     /**
-     * Recursive scan directory
-     * @param string $dir
-     * @return array
+     * Scans a directory and its subdirectories recursively, returning an array of all file paths.
+     * @param string $dir The directory to scan.
+     * @return array An array of file paths within the directory and its subdirectories.
      */
     public static function scanDir(string $dir) : array {
         $result = [];
@@ -92,10 +93,11 @@ class File
     }
 
     /**
-     * Create file
-     * @param string $path
-     * @param ?string $value
-     * @return bool
+     * Creates a new file at the specified path and sets its content.
+     * @param string $path The path of the file to be created.
+     * @param ?string $value Optional. The content to be set for the file. Default is null.
+     * @return bool Returns true if the file is successfully created and its content is set, false if the file already exists
+     *              or an exception occurs while creating or setting the content for the file.
      */
     public static function touch(string $path, ?string $value = null) : bool {
         if (file_exists($path)) {
@@ -116,10 +118,10 @@ class File
     }
 
     /**
-     * Copy file if not exists or source modify date is newer
-     * @param string $sourcePath source path
-     * @param string $destinationPath destination path
-     * @return bool
+     * Copies a file from the source path to the destination path.
+     * @param string $sourcePath The path of the source file to be copied.
+     * @param string $destinationPath The path where the file should be copied to.
+     * @return bool Returns true if the file is successfully copied, false if the file already exists and has the same or newer modification time as the source file.
      */
     public static function copy(string $sourcePath, string $destinationPath) : bool {
         $destinationModify = file_exists($destinationPath) ? filemtime($destinationPath) : 0;
@@ -133,10 +135,10 @@ class File
     }
 
     /**
-     * Copy directory
-     * @param $source
-     * @param $destination
-     * @return void
+     * Copies a directory and its contents to a destination directory.
+     * @param string $source The source directory path.
+     * @param string $destination The destination directory path.
+     * @throws \Exception If the directory copying fails.
      */
     public static function copyDirectory($source, $destination): void
     {
@@ -159,18 +161,19 @@ class File
     }
 
     /**
-     * Get file extension
-     * @param string $path
-     * @return string
+     * Returns the extension of a file path.
+     * @param string $path The file path to get the extension from.
+     * @return string The extension of the file path.
      */
     public static function getExtension(string $path) : string {
         return pathinfo($path, PATHINFO_EXTENSION);
     }
 
     /**
-     * Get content type
-     * @param string $fileExtension
-     * @return false|string
+     * Retrieves the content type based on the file extension.
+     * @param string $fileExtension The file extension.
+     * @return false|string Returns the corresponding content type if the file extension is recognized,
+     *                      false if the file extension is not recognized.
      */
     public static function getContentType(string $fileExtension): false|string
     {
