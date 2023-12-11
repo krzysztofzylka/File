@@ -144,9 +144,9 @@ class File
      * Copies a directory and its contents to a destination directory.
      * @param string $source The source directory path.
      * @param string $destination The destination directory path.
-     * @throws \Exception If the directory copying fails.
+     * @throws Exception If the directory copying fails.
      */
-    public static function copyDirectory($source, $destination): void
+    public static function copyDirectory(string $source, string $destination): void
     {
         if (is_dir($source) && is_dir($destination)) {
             $iterator = new RecursiveIteratorIterator(
