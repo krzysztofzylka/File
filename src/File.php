@@ -14,7 +14,8 @@ class File
      * @param string $path The path to be repaired
      * @return string The repaired path
      */
-    public static function repairPath(string $path) : string {
+    public static function repairPath(string $path): string
+    {
         $path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
 
         do {
@@ -32,7 +33,8 @@ class File
      *               or null if an array of paths is provided (recursive directory creation).
      * @throws Exception If the directory creation failed.
      */
-    public static function mkdir(string|array $paths, int $permission = 0755) : ?bool {
+    public static function mkdir(string|array $paths, int $permission = 0755): ?bool
+    {
         if (is_array($paths)) {
             foreach ($paths as $path) {
                 self::mkdir(self::repairPath($path), $permission);
@@ -57,7 +59,8 @@ class File
      * @param string $path The path of the file to be deleted.
      * @return bool Returns true if the file is successfully deleted, or false if the file does not exist.
      */
-    public static function unlink(string $path) : bool {
+    public static function unlink(string $path): bool
+    {
         if (!file_exists($path)) {
             return false;
         }
@@ -70,7 +73,8 @@ class File
      * @param string $dir The directory to scan.
      * @return array An array of file paths within the directory and its subdirectories.
      */
-    public static function scanDir(string $dir) : array {
+    public static function scanDir(string $dir): array
+    {
         $result = [];
 
         foreach(scandir($dir) as $filename) {
@@ -99,7 +103,8 @@ class File
      * @return bool Returns true if the file is successfully created and its content is set, false if the file already exists
      *              or an exception occurs while creating or setting the content for the file.
      */
-    public static function touch(string $path, ?string $value = null) : bool {
+    public static function touch(string $path, ?string $value = null): bool
+    {
         if (file_exists($path)) {
             return false;
         }
@@ -123,7 +128,8 @@ class File
      * @param string $destinationPath The path where the file should be copied to.
      * @return bool Returns true if the file is successfully copied, false if the file already exists and has the same or newer modification time as the source file.
      */
-    public static function copy(string $sourcePath, string $destinationPath) : bool {
+    public static function copy(string $sourcePath, string $destinationPath): bool
+    {
         $destinationModify = file_exists($destinationPath) ? filemtime($destinationPath) : 0;
         $sourceModify = file_exists($sourcePath) ? filemtime($sourcePath) : 0;
 
@@ -165,7 +171,8 @@ class File
      * @param string $path The file path to get the extension from.
      * @return string The extension of the file path.
      */
-    public static function getExtension(string $path) : string {
+    public static function getExtension(string $path): string
+    {
         return pathinfo($path, PATHINFO_EXTENSION);
     }
 
