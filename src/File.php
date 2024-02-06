@@ -144,9 +144,10 @@ class File
      * Copies a directory and its contents to a destination directory.
      * @param string $source The source directory path.
      * @param string $destination The destination directory path.
+     * @param string $permission
      * @throws Exception If the directory copying fails.
      */
-    public static function copyDirectory(string $source, string $destination): void
+    public static function copyDirectory(string $source, string $destination, string $permission = '0755'): void
     {
         if (is_dir($source) && is_dir($destination)) {
             $iterator = new RecursiveIteratorIterator(
@@ -157,8 +158,9 @@ class File
             foreach ($iterator as $item) {
                 $src = $item->getPathname();
                 $dst = $destination . '/' . $iterator->getSubPathName();
+
                 if ($item->isDir()) {
-                    mkdir($dst);
+                    self::mkdir($dst, $permission);
                 } else {
                     copy($src, $dst);
                 }
