@@ -47,10 +47,14 @@ class File
             return false;
         }
 
-        if (@mkdir(self::repairPath($paths), $permission, true)) {
-            return true;
-        } else {
-            throw new Exception('Failed create directory');
+        try {
+            if (@mkdir(self::repairPath($paths), $permission, true)) {
+                return true;
+            } else {
+                throw new Exception('Failed create directory ' . realpath($paths));
+            }
+        } catch (\Throwable $exception) {
+            throw new Exception($exception->getMessage() . '(' . realpath('/') . ')');
         }
     }
 
