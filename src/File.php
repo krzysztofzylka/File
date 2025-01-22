@@ -51,7 +51,9 @@ class File
             if (@mkdir(self::repairPath($paths), $permission, true)) {
                 return true;
             } else {
-                throw new Exception('Failed create directory ' . realpath($paths));
+                $error = error_get_last();
+
+                throw new Exception('Failed create directory ' . realpath($paths) . ', Error: ' . $error['message']);
             }
         } catch (\Throwable $exception) {
             throw new Exception($exception->getMessage() . '(' . realpath('/') . ')');
