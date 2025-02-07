@@ -289,7 +289,19 @@ class File
             'karbon' => 'application/vnd.kde.karbon',
             'kfo' => 'application/vnd.kde.kformula',
             'flw' => 'application/vnd.kde.kivio',
-            default => false
+            'mkv' => 'video/x-matroska',
+            'mpg', 'mpeg' => 'video/mpeg',
+            'flac' => 'audio/flac',
+            'txt' => 'text/plain',
+            'md' => 'text/markdown',
+            'vcf' => 'text/vcard',
+            'odt' => 'application/vnd.oasis.opendocument.text',
+            'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
+            'odp' => 'application/vnd.oasis.opendocument.presentation',
+            'odg' => 'application/vnd.oasis.opendocument.graphics',
+            'heic' => 'image/heic',
+            'heif' => 'image/heif',
+            default => false,
         };
     }
 
