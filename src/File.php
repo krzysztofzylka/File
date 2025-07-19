@@ -305,4 +305,18 @@ class File
         };
     }
 
+    /**
+     * Get file mime type
+     * @param string $path
+     * @return string
+     */
+    public static function getMimeType(string $path): string
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $path);
+        finfo_close($finfo);
+
+        return $mimeType;
+    }
+
 }
