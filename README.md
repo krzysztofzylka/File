@@ -45,3 +45,18 @@ or
 ```php
 \Krzysztofzylka\File\File::getContentType('file extension')
 ```
+## Get file mime type
+```php
+\Krzysztofzylka\File\File::getMimeType('file path')
+```
+
+# Validations
+## File size validation
+```php
+\Krzysztofzylka\File\Validation::size('file size in bytes or file path', 'allowed file size in mb')
+```
+
+## File mime type
+```php
+\Krzysztofzylka\File\Validation::mimeType('file path', ['allowed mime type list'])
+```
