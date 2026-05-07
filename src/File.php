@@ -53,7 +53,7 @@ class File
             } else {
                 $error = error_get_last();
 
-                throw new Exception('Failed create directory ' . realpath($paths) . ', Error: ' . $error['message']);
+                throw new Exception('Failed create directory ' . $paths . ', Error: ' . $error['message']);
             }
         } catch (\Throwable $exception) {
             throw new Exception($exception->getMessage() . '(' . realpath('/') . ')');
